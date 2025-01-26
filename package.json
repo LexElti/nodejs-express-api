@@ -6,9 +6,10 @@
 	"type": "commonjs",
 	"scripts": {
 		"start": "node ./dist/main.js",
+		"build": "tsc",
+		"dev": "nodemon",
 		"lint": "eslint ./src/**",
 		"lint:fix": "eslint ./src/** --fix",
-		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"license": "ISC",
@@ -25,7 +26,9 @@
 		"eslint": "^8.0.1",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
+		"nodemon": "^3.1.9",
 		"prettier": "^2.4.1",
+		"ts-node": "^10.9.2",
 		"typescript": "^5.7.3"
 	}
 }
