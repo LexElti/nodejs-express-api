@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import { Server } from 'http';
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
+import { json } from 'body-parser';
 import { UsersController } from './users/users.controller';
 import { ExceptionFilter } from './errors/exception.filter';
 import { ILogger } from './logger/logger.interface';
@@ -22,6 +23,10 @@ export class App {
     this.port = 8000;
   }
 
+  useMiddleware(): void {
+    this.app.use(json());
+  }
+
   useRoutes(): void {
     this.app.use('/users', this.usersController.router);
   }
@@ -31,6 +36,7 @@ export class App {
   }
 
   async init(): Promise<void> {
+    this.useMiddleware();
     this.useRoutes();
     this.useExceptionFilters();
 

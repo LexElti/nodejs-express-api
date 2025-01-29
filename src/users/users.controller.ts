@@ -5,6 +5,8 @@ import { BaseController } from '../common/base.controller';
 import { IUsersController } from './users.controller.interface';
 import { ILogger } from '../logger/logger.interface';
 import { TYPES } from '../types';
+import { UserLoginDto } from './dto/user-login.dto';
+import { UserRegisterDto } from './dto/user-register.dto';
 
 @injectable()
 export class UsersController extends BaseController implements IUsersController {
@@ -16,11 +18,11 @@ export class UsersController extends BaseController implements IUsersController 
     ]);
   }
 
-  login(req: Request, res: Response, next: NextFunction): void {
+  login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
     this.ok(res, 'login');
   }
 
-  register(req: Request, res: Response, next: NextFunction): void {
+  register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
     this.ok(res, 'register');
   }
 }
