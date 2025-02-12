@@ -34,6 +34,12 @@ export class UsersController extends BaseController implements IUsersController 
         func: this.login,
         middlewares: [new ValidateMiddleware(UserLoginDto)],
       },
+      {
+        path: '/info',
+        method: 'get',
+        func: this.info,
+        middlewares: [],
+      },
     ]);
   }
 
@@ -60,6 +66,11 @@ export class UsersController extends BaseController implements IUsersController 
       return next(new HTTPError(422, 'Такой пользователь уже есть'));
     }
     this.ok(res, { email: result.email, id: result.id });
+  }
+
+  async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
+    const userInfo = await this.userService.getUserInfo(user);
+    this.ok(res, { email: userInfo?.email, id: userInfo?.id });
   }
 
   private signJWT(email: string, secret: string): Promise<string> {
