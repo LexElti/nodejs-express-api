@@ -53,4 +53,8 @@ export class App {
       this.logger.log(`Сервер запущен на http://localhost:${this.port}`);
     });
   }
+
+  public close(): void {
+    this.server.close();
+  }
 }
